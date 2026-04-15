@@ -1,7 +1,8 @@
-require('dotenv').config();
-const express = require("express");
-const cors = require('cors');
-const linksRouter = require('./components/link');
+import 'dotenv/config';
+import express from 'express';
+import cors from 'cors';
+import linksRouter from './components/link.js';
+
 const app = express();
 
 
