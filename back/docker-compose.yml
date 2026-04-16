@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   app:
     build:
@@ -11,7 +9,7 @@ services:
       - PGUSER=${PGUSER}
       - PGPASSWORD=${PGPASSWORD}
       - PGHOST=db
-      - PGPORT=5433
+      - PGPORT=5432
       - PGDATABASE=${PGDATABASE}
     depends_on:
       - db

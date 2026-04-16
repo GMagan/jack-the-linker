@@ -1,7 +1,9 @@
 {
    "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
-      "dev": "node src/server.js"
+      "dev": "node src/server.js",
+      "start": "node src/server.js",
+      "migrate": "node src/database/runMigrations.js"
    },
    "dependencies": {
       "cors": "^2.8.6",

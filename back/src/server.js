@@ -16,7 +16,7 @@ app.use(express.json());
 
 app.use('/links', linksRouter);
 
-app.options('*', cors());
+app.use(cors());
 
 const PORT = 3000;
 app.listen(PORT, () => {
