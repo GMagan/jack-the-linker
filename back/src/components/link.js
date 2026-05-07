@@ -70,7 +70,6 @@ router.post('/', async (req, res) => {
 
         success = true;
       } catch (err) {
-        // erro 23505 = unique violation no PostgreSQL
         if (err.code !== '23505') {
           throw err;
         }
