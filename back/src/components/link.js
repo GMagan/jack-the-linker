@@ -51,13 +51,31 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   const { original_url } = req.body;
 
-  const short_code = Math.random().toString(36).substring(2, 8);
-
   try {
-    const result = await pool.query(
-      'INSERT INTO links (original_url, short_code) VALUES ($1, $2) RETURNING *',
-      [original_url, short_code]
-    );
+    let result;
+    let success = false;
+
+    while (!success) {
+      const short_code = Math.random()
+        .toString(36)
+        .substring(2, 8);
+
+      try {
+        result = await pool.query(
+          `INSERT INTO links (original_url, short_code)
+           VALUES ($1, $2)
+           RETURNING *`,
+          [original_url, short_code]
+        );
+
+        success = true;
+      } catch (err) {
+        // erro 23505 = unique violation no PostgreSQL
+        if (err.code !== '23505') {
+          throw err;
+        }
+      }
+    }
 
     res.status(201).json(result.rows[0]);
   } catch (err) {
