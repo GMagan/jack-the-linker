@@ -49,7 +49,14 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  const { original_url } = req.body;
+  let { original_url } = req.body;
+
+  if (
+    !original_url.startsWith("http://") &&
+    !original_url.startsWith("https://")
+  ) {
+    original_url = `https://${original_url}`;
+  }
 
   try {
     let result;
